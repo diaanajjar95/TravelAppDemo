@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_countries.*
 
-class CountriesFragment : Fragment() {
+class CountriesFragment : Fragment(), OnItemClickListener {
 
     private val adapter = RecyclerAdapter(CountriesDataSource.createCountriesList())
 
@@ -31,5 +32,10 @@ class CountriesFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = this@CountriesFragment.adapter
         }
+        adapter.setOnItemClickListener(this)
+    }
+
+    override fun onIteClick(country: Country, position: Int) {
+        findNavController().navigate(R.id.action_countriesFragment_to_countryDetailsFragment)
     }
 }

@@ -15,7 +15,7 @@ class CountryVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val ratingBar = itemView.item_country_ratingBar
     private val imageView = itemView.item_country_imageView
 
-    fun bind(country: Country){
+    fun bind(country: Country, onItemClickListener: OnItemClickListener) {
         name.text = country.name
         city.text = country.city
         numberOfDays.text = country.numberOfDays
@@ -23,6 +23,10 @@ class CountryVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         ratingBar.rating = country.rating.toFloat()
 
         Glide.with(itemView).load(country.image).into(imageView)
+
+        rootView.setOnClickListener {
+            onItemClickListener.onIteClick(country, adapterPosition)
+        }
     }
 
 }
